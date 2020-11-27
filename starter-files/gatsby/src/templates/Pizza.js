@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
+import { SEO } from '../components/SEO';
 
 const StyledPizzaGrid = styled.div`
   display: grid;
@@ -9,10 +10,9 @@ const StyledPizzaGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 `;
 
-const SinglePizzaPage = ({ data: { pizza } }) => {
-  console.log(pizza);
-
-  return (
+const SinglePizzaPage = ({ data: { pizza } }) => (
+  <>
+    <SEO title={pizza.name} image={pizza.image?.asset?.fluid?.src} />
     <StyledPizzaGrid>
       <Img fluid={pizza.image.asset.fluid} />
       <div>
@@ -24,8 +24,8 @@ const SinglePizzaPage = ({ data: { pizza } }) => {
         </ul>
       </div>
     </StyledPizzaGrid>
-  );
-};
+  </>
+);
 
 export const query = graphql`
   query($slug: String!) {
